@@ -21,10 +21,18 @@ int main(int argc, char *argv[]) {
     
     else if (strncmp(input, "echo ", 5) == 0) {
       printf("%s\n", input + 5);} 
+    
+    else if (strcmp(input, "pwd") == 0 ){
+      char cwd[1000];
+
+      if (getcwd(cwd, sizeof(cwd)) != NULL) {
+        printf("%s\n", cwd); 
+      }
+    }
 
     else if (strncmp(input, "type ", 5) == 0) {
         char *arg = input +5;
-        if (!strcmp(arg, "exit") || !strcmp(arg, "type") || !strcmp(arg, "echo")) 
+        if (!strcmp(arg, "exit") || !strcmp(arg, "type") || !strcmp(arg, "echo") || !strcmp(arg, "pwd")) 
         {printf("%s is a shell builtin\n", arg);} 
         else { 
       
@@ -101,4 +109,3 @@ int main(int argc, char *argv[]) {
   }
   return 0;
     }
-      
