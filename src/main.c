@@ -14,7 +14,8 @@ int main(int argc, char *argv[]) {
     char input[100];
     fgets(input, sizeof(input), stdin);
     input[strcspn(input, "\n")] = '\0';
-
+    
+    //built-ins
     if (strcmp(input, "exit")==0){
       break;
     } 
@@ -60,6 +61,19 @@ int main(int argc, char *argv[]) {
       }
     }}
 
+    else if (strncmp(input, "cd ", 3) == 0){
+      char *arg = input + 3; 
+
+      if (strcmp(arg, "~") == 0){
+        arg = getenv("HOME"); 
+       }
+
+      if (chdir(arg) != 0){
+        printf("cd: %s: No such file or directory\n", arg);
+      } 
+    }
+
+    // External program execution 
     else {
         char input_copy[100]; 
         strcpy(input_copy, input); 
@@ -109,3 +123,4 @@ int main(int argc, char *argv[]) {
   }
   return 0;
     }
+      
